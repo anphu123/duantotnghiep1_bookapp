@@ -61,61 +61,37 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private String name, email, password ;
-    private String birthday = "1999-01-01";
+    private String customerName, customereMail, customerPassword ;
+    private String customerbirthDate = "1999-01-01";
 
     private void validateData() {
         // get data
-        name = binding.nameEt.getText().toString().trim();
-        email = binding.emailEt.getText().toString().trim();
-        password = binding.passwordEt.getText().toString().trim();
-        String cPassword = binding.cPasswordEt.getText().toString().trim();
+        customerName = binding.nameEt.getText().toString();
+        customereMail = binding.emailEt.getText().toString();
+        customerPassword = binding.passwordEt.getText().toString();
+        String cPassword = binding.cPasswordEt.getText().toString();
 
 
         // validate data
-        if (TextUtils.isEmpty(name)) {
+        if (TextUtils.isEmpty(customerName)) {
             Toast.makeText(this, "Enter your name...", Toast.LENGTH_SHORT).show();
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(customereMail).matches()) {
             Toast.makeText(this, "Invalid email pattern...!", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(password)) {
+        } else if (TextUtils.isEmpty(customerPassword)) {
             Toast.makeText(this, "Enter password...", Toast.LENGTH_SHORT).show();
 //        } else if (TextUtils.isEmpty(cPassword)) {
 //            Toast.makeText(this, "Confirm password...", Toast.LENGTH_SHORT).show();
 //        } else if (!password.equals(cPassword)) {
 //            Toast.makeText(this, "Password doesn't match...", Toast.LENGTH_SHORT).show();
         } else {
-            Customer customer = new Customer();
-            customer.setCustomerName(name);
-            customer.setCustomereMail(email);
-            customer.setCustomerPassword(password);
-            customer.setCustomerbirthDate(birthday);
-            customer.setEnabled_CS(true);
+            Coin coin = new Coin(0);
+            Customer customer = new Customer(customerName,customerPassword,customereMail,customerbirthDate,coin,true);
             CustomerApi customerApi = retrofitService.getRetrofit().create(CustomerApi.class);
             customerApi.save(customer)
                     .enqueue(new Callback<Customer>() {
                         @Override
                         public void onResponse(Call<Customer> call, Response<Customer> response) {
-
                             Toast.makeText(getApplicationContext(), "Save successful!", Toast.LENGTH_SHORT).show();
-                            Coin coin = new Coin();
-                            int customerid = response.body().getId();
-                            Log.v("TAG", "11111111= " + response.body().toString());
-
-                            coin.setValue(0);
-                            coin.setCustomer_id(customerid);
-                            customerApi.initialCoin(coin).enqueue(new Callback<Coin>() {
-                                @Override
-                                public void onResponse(Call<Coin> call, Response<Coin> response) {
-                                    Log.v("TAG", "11111111= Khoi Tao Gia Tri Ban Dau Coin SUCCESS");
-
-                                }
-
-                                @Override
-                                public void onFailure(Call<Coin> call, Throwable t) {
-                                    Log.v("TAG", "11111111= Khoi Tao Gia Tri Ban Dau Coin FAIL");
-
-                                }
-                            });
                         }
 
                         @Override
@@ -125,9 +101,8 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
 
-            }
+        }
     }
-
 
 
 

@@ -55,4 +55,7 @@ dependencies {
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
+    implementation 'com.github.momo-wallet:mobile-sdk:1.0.7'
+
+
 }

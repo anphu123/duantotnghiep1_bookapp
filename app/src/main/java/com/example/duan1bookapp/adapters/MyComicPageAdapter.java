@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.duan1bookapp.Constants;
 import com.example.duan1bookapp.R;
 import com.example.duan1bookapp.models.Link;
 
@@ -35,7 +36,7 @@ public class MyComicPageAdapter extends RecyclerView.Adapter<MyComicPageAdapter.
         if(link == null){
             return;
         }
-        String url = "http://192.168.6.164:8080/api/v1/product/image/"+link.inamgeName;
+        String url = Constants.URL_API+ "/api/v1/product/image/"+link.inamgeName;
         Glide.with(holder.imageView.getContext()).load(url).timeout(6000).into(holder.imageView);
     }
 

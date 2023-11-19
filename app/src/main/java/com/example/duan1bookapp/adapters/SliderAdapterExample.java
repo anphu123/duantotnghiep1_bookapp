@@ -10,11 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.example.duan1bookapp.Constants;
 import com.example.duan1bookapp.R;
 import com.example.duan1bookapp.models.slideShow;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample.MyViewHolder1> {
@@ -38,7 +38,7 @@ public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample
         if (product == null) {
             return;
         }
-        String url = "http://192.168.6.164:8080/api/v1/product/image/" + product.productImageName; // Sửa productImageName thành productImageNameS
+        String url = Constants.URL_API+ "/api/v1/product/image/" + product.productImageName; // Sửa productImageName thành productImageNameS
         Glide.with(holder.imageView.getContext()).load(url).into(holder.imageView);
         holder.textView.setText(product.productName);
 
