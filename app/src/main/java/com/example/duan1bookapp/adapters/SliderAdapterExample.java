@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.example.duan1bookapp.Constants;
 import com.example.duan1bookapp.R;
+import com.example.duan1bookapp.a_interface.IClickItemProductListener;
 import com.example.duan1bookapp.models.slideShow;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
@@ -19,11 +20,16 @@ import java.util.List;
 
 public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample.MyViewHolder1> {
     private List<slideShow> mSliderItems;
+    private IClickItemProductListener iClickItemProductListener;
     private Context context;
+
+
 
     public SliderAdapterExample(Context context, List<slideShow> sliderItems) {
         this.context = context;
         this.mSliderItems = sliderItems;
+        this.iClickItemProductListener = iClickItemProductListener;
+
     }
 
     @Override
@@ -43,6 +49,7 @@ public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample
         holder.textView.setText(product.productName);
 
         // Đảm bảo rằng bạn đã khai báo iClickItemProductListener và sử dụng nó khi người dùng nhấn vào một mục.
+        
     }
 
     @Override
