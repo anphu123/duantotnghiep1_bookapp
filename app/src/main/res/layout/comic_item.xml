@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="185dp"
+    android:layout_height="213dp">
+
+    <!-- Thêm padding cho CardView -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"> <!-- Sử dụng margin thay vì padding -->
+
+        <!-- Sử dụng LinearLayout thay vì FrameLayout để căn chỉnh hình ảnh và tên manga -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Thêm Padding cho ImageView -->
+            <ImageView
+                android:id="@+id/image_view"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"/>
+            <!-- Sử dụng background cho tên manga thay vì TextView nền -->
+            <TextView
+                android:id="@+id/manga_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="X-man"
+                android:textColor="@android:color/white"
+                android:background="#80333639"
+                android:gravity="center"
+                android:padding="4dp"
+            />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

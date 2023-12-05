@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_ic_home"
+        android:icon="@mipmap/bottom_btn1"
+        android:title="Home"/>
+    <item android:id="@+id/nav_ic_manga"
+        android:icon="@drawable/ic_category_gray"
+        android:title="Type"/>
+    <item android:id="@+id/nav_ic_comment"
+        android:icon="@drawable/bottom_btn3"
+        android:title="review"/>
+    <item android:id="@+id/nav_ic_buy_coin"
+        android:icon="@mipmap/buy"
+        android:title="Donate"/>
+    <item android:id="@+id/nav_ic_user"
+        android:icon="@mipmap/bottom_btn2"
+        android:title="User"/>
+</menu>

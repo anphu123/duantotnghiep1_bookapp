@@ -1,0 +1,94 @@
+{
+  "levels": [
+    {
+      "index": 1,
+      "title": "Level 1 Grammar Listening",
+      "title_level": "Low beginner",
+      "type": "grammar",
+      "short_des": "Conversations with grammar points for low-beginners.",
+      "background_color": "0xFF5CE2E7",
+      "level":1
+    },
+    {
+      "index": 2,
+      "title": "Level 2 Grammar Listening",
+      "title_level": "Mid beginner",
+      "type": "grammar",
+      "short_des": "Conversations with grammar points for mid-beginners.",
+      "Background_color": "0xFF35B7FF",
+      "level":2
+    },
+    {
+      "index": 3,
+      "title": "Level 3 Grammar Listening",
+      "title_level": "High beginner",
+      "type": "grammar",
+      "short_des": "Conversations with grammar points for high-beginners.",
+      "Background_color": "0xFF00c3cc",
+      "level":3
+    },
+    {
+      "index": 4,
+      "title": "Level 3 Natural Listening",
+      "title_level": "High beginner",
+      "type": "vocabulary",
+      "short_des": "Listen to slower conversations with basic vocabulary.",
+      "Background_color": "0xFF00c3cc",
+      "level":3
+    },
+    {
+      "index": 5,
+      "title": "Level 4 Grammar Listening",
+      "title_level": "Low intermediate",
+      "type": "grammar",
+      "short_des": "Lessons that feature grammar for intermediate learners.",
+      "Background_color": "0xFFFFDF59",
+      "level":4
+    },
+    {
+      "index": 6,
+      "title": "Level 4 Natural Listening",
+      "title_level": "Low intermediate",
+      "type": "vocabulary",
+      "short_des": "Listen to natural conversations with basic vocabulary.",
+      "Background_color": "0xFFFFDF59",
+      "level":4
+    },
+    {
+      "index": 7,
+      "title": "Level 5 Grammar Listening",
+      "title_level": "Mid intermediate",
+      "type": "grammar",
+      "short_des": "Lessons that feature grammar for intermediate learners.",
+      "Background_color": "0xFFFFBE59",
+      "level":5
+    },
+    {
+      "index": 8,
+      "title": "Level 5 Natural Listening",
+      "title_level": "Mid intermediate",
+      "type": "vocabulary",
+      "short_des": "Listen to slower conversations with intermediate vocabulary.",
+      "Background_color": "0xFFFFBE59",
+      "level":5
+    },
+    {
+      "index": 9,
+      "title": "Level 6 Natural Listening",
+      "title_level": "High intermediate",
+      "type": "vocabulary",
+      "short_des": "Hear naturally fast conversations with advanced vocabulary.",
+      "Background_color": "0xFFFF924C",
+      "level":6
+    },
+    {
+      "index": 10,
+      "title": "Level 7 Natural Listening",
+      "title_level": "Advanced",
+      "type": "vocabulary",
+      "short_des": "Hear naturally fast conversations with advanced vocabulary.",
+      "Background_color": "0xFFFF924C",
+      "level":7
+    }
+  ]
+}
