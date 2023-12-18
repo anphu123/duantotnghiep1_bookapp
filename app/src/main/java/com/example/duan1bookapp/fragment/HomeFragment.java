@@ -3,10 +3,15 @@ package com.example.duan1bookapp.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,8 +20,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1bookapp.R;
-import com.example.duan1bookapp.a_interface.IClickItemProductListener;
 import com.example.duan1bookapp.activities.ListChapter;
+import com.example.duan1bookapp.a_interface.IClickItemProductListener;
 import com.example.duan1bookapp.adapters.MyComicAdapter;
 import com.example.duan1bookapp.adapters.SliderAdapterExample;
 import com.example.duan1bookapp.databinding.FragmentHomeBinding;
@@ -25,10 +30,8 @@ import com.example.duan1bookapp.models.slideShow;
 import com.example.duan1bookapp.retrofit.IComicAPI;
 import com.example.duan1bookapp.retrofit.RetrofitService;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
-import com.smarteist.autoimageslider.IndicatorView.draw.controller.DrawController;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,21 +41,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
+
     private RetrofitService retrofitService = new RetrofitService();
     private List<Product> comicList;
     private RecyclerView recycler_comic;
     private FragmentHomeBinding binding;
+    private EditText searchEditText;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
     }
 
     List<slideShow> slideShowsList;
@@ -63,9 +64,31 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View rootView = binding.getRoot();
 
+        // Load slideshow
         loadSlideShow();
 
-        return binding.getRoot();
+        // Initialize search components
+        searchEditText = binding.searchEt;
+
+        // Set up the text change listener for live search
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not used
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                performSearch(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not used
+            }
+        });
+
+        return rootView;
     }
 
     @Override
@@ -107,8 +130,6 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
 
-
-    // Cài đặt phương thức để tải slideshow
     private void loadSlideShow() {
         slideShowsList = new ArrayList<>();
         IComicAPI iComicAPI = retrofitService.getRetrofit().create(IComicAPI.class);
@@ -133,15 +154,45 @@ public class HomeFragment extends Fragment {
                     binding.imageSlider.setIndicatorUnselectedColor(Color.GRAY);
                     binding.imageSlider.setScrollTimeInSec(4);
                     binding.imageSlider.startAutoCycle();
-
                 }
             }
 
             @Override
             public void onFailure(Call<List<slideShow>> call, Throwable t) {
-                // Xử lý lỗi
+                // Handle failure
+                Toast.makeText(getContext(), "Failed to load slideshow", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    private void performSearch(String query) {
+        // Check if the query is not empty
+        if (!query.isEmpty()) {
+            // Filter the comicList based on the search query
+            List<Product> searchResults = new ArrayList<>();
+            for (Product comic : comicList) {
+                if (comic.getProductName().toLowerCase().contains(query.toLowerCase())) {
+                    searchResults.add(comic);
+                }
+            }
+
+            // Display search results
+            MyComicAdapter searchAdapter = new MyComicAdapter(searchResults, new IClickItemProductListener() {
+                @Override
+                public void onClickItemUser(Product product) {
+                    onClickGoToChapterList(product);
+                }
+            });
+            recycler_comic.setAdapter(searchAdapter);
+        } else {
+            // If the query is empty, display the original comicList
+            MyComicAdapter myComicAdapter = new MyComicAdapter(comicList, new IClickItemProductListener() {
+                @Override
+                public void onClickItemUser(Product product) {
+                    onClickGoToChapterList(product);
+                }
+            });
+            recycler_comic.setAdapter(myComicAdapter);
+        }
+    }
 }
